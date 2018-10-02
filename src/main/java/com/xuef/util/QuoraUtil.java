@@ -8,8 +8,8 @@ import java.security.MessageDigest;
 /**
  * Created by nowcoder on 2016/7/3.
  */
-public class WendaUtil {
-    private static final Logger logger = LoggerFactory.getLogger(WendaUtil.class);
+public class QuoraUtil {
+    private static final Logger logger = LoggerFactory.getLogger(QuoraUtil.class);
 
     public static String MD5(String key) {
         char hexDigits[] = {

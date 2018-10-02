@@ -10,7 +10,7 @@ spring:
 #mybatis的配置
 mybatis:
   type-aliases-package: com.xuef.model
-  #config-location: classpath:/mybatis-config.xml
+  config-location: classpath:/mybatis-config.xml
   #mapper-locations: classpath:mapper/*.xml
 
 #启动的服务监听端口

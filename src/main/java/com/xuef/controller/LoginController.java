@@ -1,7 +1,8 @@
 package com.xuef.controller;
 
+import com.xuef.base.ApiResponse;
+import com.xuef.model.User;
 import com.xuef.service.UserService;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,47 +24,58 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(path = {"/reg/"}, method = {RequestMethod.POST})
+    @RequestMapping(path = {"/reg"}, method = {RequestMethod.POST})
     public String reg(Model model, @RequestParam("username") String username,
                       @RequestParam("password") String password,
-                      @RequestParam("next") String next,
-                      @RequestParam(value="rememberme", defaultValue = "false") boolean rememberme,
                       HttpServletResponse response) {
         try {
-            Map<String, String> map = userService.register(username, password);
+            Map<String, Object> map = userService.register(username, password);
+            // 注册成功，跳到主页; 否则重新转至注册页面
             if (map.containsKey("ticket")) {
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
                 cookie.setPath("/");
-                if (rememberme) {
-                    cookie.setMaxAge(3600*24*5);
-                }
                 response.addCookie(cookie);
-                if (StringUtils.isNotBlank(next)) {
-                    return "redirect:" + next;
-                }
                 return "redirect:/";
             } else {
                 model.addAttribute("msg", map.get("msg"));
-                return "login";
+                return "register";
             }
-
         } catch (Exception e) {
             logger.error("注册异常" + e.getMessage());
             model.addAttribute("msg", "服务器错误");
-            return "login";
+            return "register";
         }
     }
 
-    @RequestMapping(path = {"/reglogin"}, method = {RequestMethod.GET})
-    public String regloginPage(Model model, @RequestParam(value = "next", required = false) String next) {
-        model.addAttribute("next", next);
-        return "login";
+    @RequestMapping(path = {"/check"}, method = {RequestMethod.POST})
+    @ResponseBody
+    public ApiResponse check(Model model, @RequestParam("username") String username,
+                             HttpServletResponse response) {
+        try {
+            User user = userService.getByName(username);
+            if (user == null){
+                return ApiResponse.ofSuccess("username not exist");
+            } else {
+                return ApiResponse.ofMessage(300, "username exists");
+            }
+        } catch (Exception e) {
+            return ApiResponse.ofMessage(500, "server error");
+        }
     }
-/**
-    @RequestMapping(path = {"/login/"}, method = {RequestMethod.POST})
+
+    @RequestMapping(path = {"/reg"}, method = {RequestMethod.GET})
+    public String regloginPage(Model model) {
+        return "register";
+    }
+
+    @RequestMapping(path = {"/"}, method = {RequestMethod.GET})
+    public String index() {
+        return "index";
+    }
+
+    @RequestMapping(path = {"/login"}, method = {RequestMethod.POST})
     public String login(Model model, @RequestParam("username") String username,
                         @RequestParam("password") String password,
-                        @RequestParam(value="next", required = false) String next,
                         @RequestParam(value="rememberme", defaultValue = "false") boolean rememberme,
                         HttpServletResponse response) {
         try {
@@ -75,9 +87,6 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
-                if (StringUtils.isNotBlank(next)) {
-                    return "redirect:" + next;
-                }
                 return "redirect:/";
             } else {
                 model.addAttribute("msg", map.get("msg"));
@@ -89,8 +98,11 @@ public class LoginController {
             return "login";
         }
     }
- */
 
+    @RequestMapping(path = {"/login"}, method = {RequestMethod.GET})
+    public String login() {
+        return "login";
+    }
     @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(@CookieValue("ticket") String ticket) {
         //userService.logout(ticket);

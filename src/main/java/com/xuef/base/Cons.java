@@ -1,4 +1,4 @@
-package com.xuef.constant;
+package com.xuef.base;
 
 /**
  * Created by moveb on 2018/10/2.
