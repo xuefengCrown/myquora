@@ -103,4 +103,9 @@ public class UserService {
         loginTicketDao.addTicket(ticket);
         return ticket.getTicket();
     }
+
+    public void logout(String ticket) {
+        // 用status来标志数据是否有效
+        loginTicketDao.updateStatus(ticket, 1);
+    }
 }

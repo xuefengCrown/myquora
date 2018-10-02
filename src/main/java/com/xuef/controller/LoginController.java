@@ -3,6 +3,7 @@ package com.xuef.controller;
 import com.xuef.base.ApiResponse;
 import com.xuef.model.User;
 import com.xuef.service.UserService;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,9 +74,20 @@ public class LoginController {
         return "index";
     }
 
+    /**
+     *
+     * @param model
+     * @param username
+     * @param password
+     * @param target 登录成功后的跳转目标
+     * @param rememberme
+     * @param response
+     * @return
+     */
     @RequestMapping(path = {"/login"}, method = {RequestMethod.POST})
     public String login(Model model, @RequestParam("username") String username,
                         @RequestParam("password") String password,
+                        @RequestParam(value = "target", required = false) String target,
                         @RequestParam(value="rememberme", defaultValue = "false") boolean rememberme,
                         HttpServletResponse response) {
         try {
@@ -87,6 +99,9 @@ public class LoginController {
                     cookie.setMaxAge(3600*24*5);
                 }
                 response.addCookie(cookie);
+                if (StringUtils.isNotBlank(target)) {
+                    return "redirect:" + target;
+                }
                 return "redirect:/";
             } else {
                 model.addAttribute("msg", map.get("msg"));
@@ -100,12 +115,15 @@ public class LoginController {
     }
 
     @RequestMapping(path = {"/login"}, method = {RequestMethod.GET})
-    public String login() {
+    public String loginPage(Model model,
+                            @RequestParam(value = "target", required = false) String target) {
+        model.addAttribute("target", target);
         return "login";
     }
+
     @RequestMapping(path = {"/logout"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String logout(@CookieValue("ticket") String ticket) {
-        //userService.logout(ticket);
+        userService.logout(ticket);
         return "redirect:/";
     }
 

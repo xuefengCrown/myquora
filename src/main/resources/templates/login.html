@@ -11,6 +11,7 @@
     <div class="container blog-content-container">-->
 		<form class="form-signin" th:action="@{/login}" method="post">
 			<h1 class="h3 mb-3 font-weight-normal">plea sign in</h1>
+			<input type="hidden" name="target" th:value="${target}"/>
 			<div class="col-md-12" th:if="${loginError}">
 				<p class="isa_error" th:text="${errorMsg}"></p>
 			</div>
@@ -24,7 +25,7 @@
 				</label>
 			</div>
 			<label>
-				<a class="float-left" href="/register">go2 Register</a>
+				<a class="float-left" href="/reg">去注册</a>
 			</label>
 			<button class="btn btn-lg btn-primary btn-block" id="login-submit" type="submit">Sign in</button>
 
