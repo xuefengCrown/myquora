@@ -82,4 +82,7 @@ p.blog-summary,span.blog-summary{
 .blog-title-box{
     margin-left: 60px;
 }
-
+.gray{
+    color: #888888;
+    font-style: italic;
+}

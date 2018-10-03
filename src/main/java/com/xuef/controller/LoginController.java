@@ -69,11 +69,6 @@ public class LoginController {
         return "register";
     }
 
-    @RequestMapping(path = {"/"}, method = {RequestMethod.GET})
-    public String index() {
-        return "index";
-    }
-
     /**
      *
      * @param model

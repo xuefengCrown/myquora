@@ -31,6 +31,9 @@ public class UserService {
     public User getByName(String name){
         return userDao.getByName(name);
     }
+    public User getUserById(int id) {
+        return userDao.getById(id);
+    }
     public Map<String, Object> register(String name, String password){
         Map<String, Object> res = new HashMap<>();
         // 检查 name, password 格式
