@@ -1,4 +1,4 @@
-package com.xuef.model;
+package com.xuef.vo;
 
 import java.util.HashMap;
 import java.util.Map;

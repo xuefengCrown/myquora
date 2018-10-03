@@ -41,6 +41,7 @@ CREATE TABLE `comment` (
 `created_date` DATETIME NOT NULL,
 `entity_id` INT NOT NULL,
 `entity_type` INT(1) NOT NULL,
+`status` INT NOT NULL DEFAULT 0,
 PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

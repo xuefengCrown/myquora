@@ -3,6 +3,7 @@ package com.xuef.controller;
 import com.xuef.model.*;
 import com.xuef.service.QuestionService;
 import com.xuef.service.UserService;
+import com.xuef.vo.ViewObj;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

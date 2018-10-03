@@ -1,0 +1,10 @@
+
+1. 使用 ViewObject 封装送往View的数据
+
+2. 旧数据失效，而不是删除！
+通过 status 标志位来实现
+
+3. ThreadLocal
+
+4. dao层不认业务，只认操作(updateStatus)
+service层反应业务(deleteComment)

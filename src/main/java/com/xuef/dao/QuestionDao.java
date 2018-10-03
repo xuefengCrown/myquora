@@ -22,6 +22,6 @@ public interface QuestionDao {
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " where id=#{id}"})
     Question getById(int id);
 
-    @Update({"update ", TABLE_NAME, " set comment_count = #{commentNum} where id=#{id}"})
+    @Update({"update ", TABLE_NAME, " set comment_num = #{commentNum} where id=#{id}"})
     int updateCommentCount(@Param("id") int id, @Param("commentNum") int commentCount);
 }

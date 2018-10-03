@@ -110,6 +110,10 @@ button,input,select,textarea {
 img {
     border:0
 }
+.small-avatar{
+    width: 25px;
+    height: 25px;
+}
 a {
     text-decoration:none
 }

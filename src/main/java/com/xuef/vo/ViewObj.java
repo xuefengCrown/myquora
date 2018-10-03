@@ -1,8 +1,10 @@
-package com.xuef.model;
+package com.xuef.vo;
 
 import java.util.Date;
 
 /**
+ * 封装 送往 View的question实体
+ * 但是，这个对象有些笨重(不知道有什么更好的解决办法)
  * Created by moveb on 2018/10/2.
  */
 public class ViewObj {
