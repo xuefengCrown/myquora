@@ -15,6 +15,24 @@ public class ViewComment {
     private String content;
     private Date createdDate;
     private int status;
+    private int likeStatus;
+    private long likeCount;
+
+    public long getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(long likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getLikeStatus() {
+        return likeStatus;
+    }
+
+    public void setLikeStatus(int likeStatus) {
+        this.likeStatus = likeStatus;
+    }
 
     public String getContent() {
         return content;

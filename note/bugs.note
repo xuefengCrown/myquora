@@ -3,3 +3,5 @@
 1. 查询user时，user_id 没有映射进来
 需要在mybatis-config.xml 中添加驼峰转换支持
 
+2. addMessage 时，卡住了，也没报错，不知道什么原因。
+

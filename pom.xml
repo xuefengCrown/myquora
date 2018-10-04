@@ -102,6 +102,14 @@
 			<artifactId>thymeleaf-spring4</artifactId>
 			<version>3.0.2.RELEASE</version>
 		</dependency>
+		<!--Jedis-->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>2.9.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -111,6 +119,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<!-- mybatis generator 自动生成代码插件 -->
+			<!--
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>
 				<artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -121,6 +130,7 @@
 					<verbose>true</verbose>
 				</configuration>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 

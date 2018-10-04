@@ -6,11 +6,8 @@ import com.xuef.model.Comment;
 import com.xuef.model.Question;
 import com.xuef.model.User;
 import com.xuef.model.UserHolder;
+import com.xuef.service.*;
 import com.xuef.vo.ViewComment;
-import com.xuef.service.CommentService;
-import com.xuef.service.QuestionService;
-import com.xuef.service.SensitiveFilterService;
-import com.xuef.service.UserService;
 import com.xuef.vo.ViewObj;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +36,9 @@ public class QuestionController {
 
     @Autowired
     CommentService commentService;
+    @Autowired
+    UpvoteService upvoteService;
+
     @RequestMapping(value = "/question/add", method = {RequestMethod.POST})
     @ResponseBody
     public ApiResponse addQuestion(@RequestParam("title") String title,
@@ -84,6 +84,7 @@ public class QuestionController {
         setQuestionView(question, questionView, userService.getUserById(question.getUserId()));
         List<Comment> commentList = commentService.getCommentsByEntity(id, EntityType.ENTITY_QUESTION);
         List<ViewComment> comments = new ArrayList<>();
+        User user = userHolder.getUser();
         for (Comment comment : commentList) {
             /**
              * ViewObject的设计很不合理，如果comment有几百个字段，那要怎么办？
@@ -97,11 +98,17 @@ public class QuestionController {
             c.setEntityId(comment.getEntityId());
             c.setStatus(comment.getStatus());
             c.setUser(userService.getUserById(comment.getUserId()));
+            if(user != null){
+                c.setLikeStatus(upvoteService.getLikeStatus(user.getId(), EntityType.ENTITY_COMMENT, comment.getId()));
+            }else{
+                c.setLikeStatus(0);
+            }
+            c.setLikeCount(upvoteService.getLikeCount(EntityType.ENTITY_COMMENT, comment.getId()));
             comments.add(c);
         }
 
         model.addAttribute("question", questionView);
         model.addAttribute("comments", comments);
-        return "qDetail";
+        return "question_detail";
     }
 }

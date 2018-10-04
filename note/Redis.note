@@ -1,0 +1,54 @@
+
+# 配置
+1. 备份策略
+
+2. RDB && AOF
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+# 本地操作redis
+cd /home/xuef/soft4dev/redis-4.0.9/src
+./redis-cli
+;; 授权
+auth password
+
+> keys *
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+# client
+面向不同语言的接口
+
+# how to use it?
+Jedis
+https://github.com/xetorthio/jedis
+
+# 连接池 JedisPool
+# command
+命令行
+;; 选择2号数据库
+select 2
+keys pv*
+
+# jedis
+;; 带有过期时间(很适合验证码)
+jedis.setex()
+
+;; 浏览量更新
+jedis.set("pv", "100");
+jedis.incr("pv");
+jedis.incrBy("pv", 5);
+
+;; 最新关注的10个人
+;; 排名最高的 n 个人
+list
+
+;; hash
+hset
+
+;; set 共同关注, 关注列表
+
+;; 排行榜(优先队列)
+zset
+
+;; 序列化与反序列化
+redis 作为缓存
