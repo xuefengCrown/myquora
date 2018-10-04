@@ -29,7 +29,8 @@ CREATE TABLE `message` (
 `from_id` INT NOT NULL,
 `to_id` INT NOT NULL,
 `content` TEXT NULL,
-`conversation_id` INT NOT NULL,
+`has_read` INT NOT NULL,
+`conversation_id` VARCHAR(45) NOT NULL,
 `created_date` DATETIME NOT NULL,
 PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

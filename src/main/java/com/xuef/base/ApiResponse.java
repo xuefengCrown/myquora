@@ -25,12 +25,18 @@ public class ApiResponse<T> implements Serializable {
         this.message = message;
         this.obj = data;
     }
-
+    public ApiResponse(int code, String message){
+        this.code = code;
+        this.message = message;
+    }
     public static <T> ApiResponse ofSuccess(T data){
         return new ApiResponse(Status.SUCCESS.getCode(), Status.SUCCESS.getMessage(), data);
     }
     public static <T> ApiResponse ofMessage(int code, String message){
         return new ApiResponse(code, message, null);
+    }
+    public static <T> ApiResponse ofNotLogin(){
+        return new ApiResponse(Status.NOT_LOGIN.getCode(), Status.NOT_LOGIN.getMessage());
     }
     /**
      * 封装状态信息

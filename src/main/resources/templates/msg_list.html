@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+</head>
+<link rel="stylesheet" href="../styles/letter.css" th:href="@{../styles/letter.css}">
+    <div id="main">
+        <div class="zg-wrap zu-main clearfix ">
+            <ul class="letter-list">
+                <li id="conversation-item-10001_622873" th:each="conversation : ${conversations}">
+                <a class="letter-link" th:href="'/msg/detail?conversationId=' + ${conversation.objs['msg'].conversationId}">
+                </a>
+                <div class="letter-info">
+                <span class="l-time" th:text="${#dates.format(conversation.objs['msg'].createdDate, 'yyyy-MM-dd HH:mm')}"></span>
+                <div class="l-operate-bar">
+                <a th:href="'/msg/' + ${conversation.objs['msg'].conversationId}"
+                   th:text="${conversation.objs['msg'].id}  + '条消息'">
+                </a>
+                </div>
+                </div>
+                <div class="chat-headbox">
+                <span class="msg-num" th:text="${conversation.objs['unread']}">
+                </span>
+                <a class="list-head">
+                <img alt="头像" th:src="${conversation.objs['user'].profile}">
+                </a>
+                </div>
+                <div class="letter-detail">
+                <a th:text="${conversation.objs['user'].name}" class="letter-name level-color-1">
+                </a>
+                <p class="letter-brief">
+                <a th:href="'/msg/' + ${conversation.objs['msg'].conversationId}" th:text="${conversation.objs['msg'].content}">
+                </a>
+                </p>
+                </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+<div th:replace="~{fragments/footer :: footer}">...</div>
+</html>

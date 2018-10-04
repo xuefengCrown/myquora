@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}">
+</head>
+<link rel="stylesheet" href="../styles/letter.css" th:href="@{../styles/letter.css}">
+<div id="main">
+    <div class="zg-wrap zu-main clearfix ">
+        <ul class="letter-chatlist">
+            <li id="msg-item-4009580" th:each="message : ${messages}">
+                <div>
+                    <a>
+                        <img class="small_avatar" alt="avatar" th:src="${message.objs['profile']}">
+                    </a>
+                    <span th:text="${message.objs['username']}"></span>
+                </div>
+                <div class="tooltip fade right in">
+                    <div class="tooltip-arrow"></div>
+                    <div class="tooltip-inner letter-chat clearfix">
+                        <div class="letter-info">
+                            <p class="letter-time" th:text="${#dates.format(message.objs['msg'].createdDate, 'yyyy-MM-dd HH:mm')}"></p>
+                        </div>
+                        <p class="chat-content" th:text="${message.objs['msg'].content}">
+                        </p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+    <div th:replace="~{fragments/footer :: footer}">...</div>
+</html>

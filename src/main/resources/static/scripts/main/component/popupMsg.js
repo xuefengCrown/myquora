@@ -79,15 +79,15 @@ var oPopupAdd = new PopupAdd({
                 bSubmit = true;
                 // 提交内容
                 $.ajax({
-                    url: '/msg/addMessage',
+                    url: '/msg',
                     type: 'post',
                     data: oData,
                     dataType: 'json'
                 }).done(function (oResult) {
                     // 未登陆，跳转到登陆页面
-                    if (oResult.code === 999) {
-                        window.location.href = '/reglogin?next=' + window.encodeURIComponent(window.location.href);
-                    } else if (oResult.code !== 0) {
+                    if (oResult.code === 10000) {
+                        window.location.href = '/login?target=' + window.encodeURIComponent(window.location.href);
+                    } else if (oResult.code !== 200) {
                         that.error(oResult.msg || '出现错误，请重试');
                     } else {
                         oConf.ok && oConf.ok.call(that);
