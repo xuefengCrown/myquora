@@ -8,7 +8,7 @@
         <div class="zg-wrap zu-main clearfix ">
             <ul class="letter-list">
                 <li id="conversation-item-10001_622873" th:each="conversation : ${conversations}">
-                <a class="letter-link" th:href="'/msg/detail?conversationId=' + ${conversation.objs['msg'].conversationId}">
+                <a class="letter-link" th:href="'/msg/' + ${conversation.objs['msg'].conversationId}">
                 </a>
                 <div class="letter-info">
                 <span class="l-time" th:text="${#dates.format(conversation.objs['msg'].createdDate, 'yyyy-MM-dd HH:mm')}"></span>

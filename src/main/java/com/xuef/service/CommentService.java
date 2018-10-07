@@ -15,6 +15,9 @@ public class CommentService {
     @Autowired
     private CommentDao commentDao;
 
+    public Comment getCommentById(int id){
+        return commentDao.getCommentById(id);
+    }
     public List<Comment> getCommentsByEntity(int entityId, int entityType) {
         return commentDao.selectByEntity(entityId, entityType);
     }
@@ -31,5 +34,8 @@ public class CommentService {
         // dao层不认业务，只认操作(updateStatus)
         // service层反应业务(deleteComment)
         commentDao.updateStatus(entityId, entityType, 1);
+    }
+    public int getUserCommentNum(int userId){
+        return commentDao.getUserCommentNum(userId);
     }
 }

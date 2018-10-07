@@ -1,9 +1,14 @@
 package com.xuef.controller;
 
+import com.xuef.async.EventObj;
+import com.xuef.async.EventProducer;
+import com.xuef.async.EventType;
 import com.xuef.base.ApiResponse;
 import com.xuef.base.EntityType;
+import com.xuef.model.Comment;
 import com.xuef.model.User;
 import com.xuef.model.UserHolder;
+import com.xuef.service.CommentService;
 import com.xuef.service.UpvoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +31,10 @@ public class UpvoteController {
     UpvoteService upvoteService;
     @Autowired
     UserHolder userHolder;
+    @Autowired
+    EventProducer eventProducer;
+    @Autowired
+    CommentService commentService;
 
     @RequestMapping(path = "/like", method = RequestMethod.POST)
     @ResponseBody
@@ -37,6 +46,15 @@ public class UpvoteController {
                 return ApiResponse.ofNotLogin();
             }else{
                 long likeCount = upvoteService.like(user.getId(), EntityType.ENTITY_COMMENT, commentId);
+                Comment comment = commentService.getCommentById(commentId);
+                eventProducer.fireEvent(new EventObj()
+                        .setTriggerId(user.getId())
+                        .setType(EventType.LIKE)
+                        .setEntityId(commentId)
+                        .setEntityType(EntityType.ENTITY_COMMENT)
+                        .setEntityOwnerId(comment.getUserId())
+                        .setExt("questionId", String.valueOf(comment.getEntityId()))
+                );
                 return ApiResponse.ofSuccess(likeCount);
             }
         }catch (Exception e){

@@ -16,6 +16,15 @@ public class ViewObj {
     private int commentNum;
     private String username;
     String profile;
+    long fansCount;
+
+    public long getFansCount() {
+        return fansCount;
+    }
+
+    public void setFansCount(long fansCount) {
+        this.fansCount = fansCount;
+    }
 
     public int getCommentNum() {
         return commentNum;

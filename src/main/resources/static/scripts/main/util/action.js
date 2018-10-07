@@ -97,7 +97,7 @@
     function fFollowQuestion(oConf) {
         var that = this;
         that.post({
-            url: '/followQuestion',
+            url: '/followQ',
             data: {questionId: oConf.questionId},
             call: oConf.call,
             error: oConf.error,
@@ -116,7 +116,7 @@
     function fUnFollowQuestion(oConf) {
         var that = this;
         that.post({
-            url: '/unfollowQuestion',
+            url: '/unfollowQ',
             data: {questionId: oConf.questionId},
             call: oConf.call,
             error: oConf.error,

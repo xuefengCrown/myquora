@@ -8,8 +8,8 @@ import java.security.MessageDigest;
 /**
  * Created by nowcoder on 2016/7/3.
  */
-public class QuoraUtil {
-    private static final Logger logger = LoggerFactory.getLogger(QuoraUtil.class);
+public class QuoraMD5Util {
+    private static final Logger logger = LoggerFactory.getLogger(QuoraMD5Util.class);
     public static String MD5(String key) {
         char hexDigits[] = {
                 '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'

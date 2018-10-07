@@ -1,0 +1,19 @@
+
+# 问题详情页面有哪些元素?
+场景：某用户请求 某问题详情页 /question/{qid}
+
+目的：通过分析页面元素和业务需要来确定相应的数据模型(数据元素 + 关系)
+
+question
+    id
+    title
+    content
+    ownerId
+    createdDate
+
+
+
+
+
+
+

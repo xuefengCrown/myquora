@@ -1,0 +1,9 @@
+
+应用启动后，对于某特定 Controller 类，会有几个实例?
+
+会有几个 EventConsumer(@Service) 实例?
+
+容器中有一个 XXXServlet实例，每次请求过来，会开个新进程，进程调用service()方法来提供服务。
+
+
+

@@ -5,7 +5,7 @@ import com.xuef.dao.LoginTicketDao;
 import com.xuef.dao.UserDao;
 import com.xuef.model.LoginTicket;
 import com.xuef.model.User;
-import com.xuef.util.QuoraUtil;
+import com.xuef.util.QuoraMD5Util;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +55,7 @@ public class UserService {
         User user = new User();
         user.setName(name);
         user.setSalt(UUID.randomUUID().toString().substring(0,6));
-        user.setPassword(QuoraUtil.MD5(password + user.getSalt()));
+        user.setPassword(QuoraMD5Util.MD5(password + user.getSalt()));
         user.setProfile(Cons.defaultProfile);
 
         userDao.addUser(user);
@@ -85,7 +85,7 @@ public class UserService {
             return map;
         }
 
-        if (!QuoraUtil.MD5(password+user.getSalt()).equals(user.getPassword())) {
+        if (!QuoraMD5Util.MD5(password+user.getSalt()).equals(user.getPassword())) {
             map.put("msg", "密码不正确");
             return map;
         }
